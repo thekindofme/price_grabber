@@ -1,3 +1,17 @@
 Pricegrabber
 
 Parse various infomation (such as item names/price...etc) from sri lankan computer seller's price lists / product catalogs / shopping applications online.
+
+You can configure what parsers are run by modifing the main.rb file. main.rb can be run using the command line and it would print all its output to the screen.
+
+Retailers Supported
+
+abc_computers
+barclays
+laptoplk
+memory_lk
+slmega
+tech_ware_house
+
+WARNING!!!
+running this script(s) continusly against any site could put a hevy strain on the web site. So be mindful of how frequntly you use it.
