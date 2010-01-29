@@ -40,7 +40,7 @@ A library to parse various information (such as item names/price...etc) from sel
 
 ## Requirements
 
-* ruby
+* ruby 1.8.*
 * mechanize rubygem
 
 ## Warning!
