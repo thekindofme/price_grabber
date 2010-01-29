@@ -33,7 +33,9 @@ A library to parse various information (such as item names/price...etc) from sel
     require "data_structures/product"
     require "parsers/abc_computers_parser"
 
+    #Parse and print out the available categories
     LPriceGrabber::ABCComputersParser.new.categories.each { |result| puts result }
+    #Parse and print out all the products in all categories
     LPriceGrabber::ABCComputersParser.new.parse
 
 ## Requirements
