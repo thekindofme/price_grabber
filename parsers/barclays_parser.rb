@@ -2,34 +2,27 @@ require 'rubygems'
 require 'mechanize'
 
 module LPriceGrabber
-  class BarclaysParser
-    def initialize
-
-    end
+  class BarclaysParser < Parser
 
     def categories
-      categiries = []
-      agent = WWW::Mechanize.new
-      page = agent.get('http://www.barclays.lk/bc/items.asp')
-
-      page.search("//a[@class='featured']").each do |link|
+      categories = []
+      WWW::Mechanize.new.get('http://www.barclays.lk/bc/items.asp').search("//a[@class='featured']").each do |link|
         if link['href'].include?("items.asp")
           c = Category.new
           c.name = link.text
           c.url = "http://www.barclays.lk/bc/#{link['href']}"
-          categiries << c
+          categories << c
           puts c
         end
       end
-      categiries
+      categories
     end
 
 
 =begin
-Parse slmega.com for prodcuts and their attributes and will return a array of Product objects.
+Parse slmega.com for products and their attributes and will return a array of Product objects.
 =end
     def parse
-      count =0
       products = []
       agent = WWW::Mechanize.new
 

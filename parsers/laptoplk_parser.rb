@@ -1,22 +1,19 @@
 require 'rubygems'
 require 'mechanize'
-require "generator"
 
 module LPriceGrabber
 
 =begin
 LaptoplkParser can parse laptop.lk for all products in all categories and retrieve their attributes such as name, price...etc
 =end
-  class LaptoplkParser
+  class LaptoplkParser < Parser
 
 =begin
 Returns a array of Categories of products available on the site.
 =end
     def categories
       categories = []
-      agent = WWW::Mechanize.new
-      page = agent.get('http://laptop.lk')
-      page.links.each {|link|
+      WWW::Mechanize.new.get('http://laptop.lk').links.each {|link|
         if (link.href && link.href.include?("product_lists.php?"))
           c = Category.new
           c.name = link.text
@@ -43,21 +40,21 @@ Parse laptop.lk for products and their attributes and will return a array of Pro
 
         while true
           product_names_and_links = page.search("//a[@class='ProductListProductTitle']")
-          product_price = page.search("//span[@class='ProductListPrice']")
+          product_prices = page.search("//span[@class='ProductListPrice']")
 
           #remove the last items from both arrays as there is a "Back..." link coming in as the last item.
           product_names_and_links.pop
-          product_price.pop
+          product_prices.pop
 
-          SyncEnumerator.new(product_names_and_links, product_price).each { |link, span|
+          i = 0
+          product_names_and_links.each do |link|
             p = Product.new
             p.name = link.text
             p.url = "http://laptop.lk/#{link['href']}"
-            p.price = get_price(span.text)
+            p.price = get_price(product_prices[i].text); i+=1
 
-            puts p
             products << p
-          }
+          end
 
           link = page.link_with(:text => next_page)
           if link != nil

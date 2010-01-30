@@ -14,7 +14,7 @@ A library to parse various information (such as item names/price...etc) from sel
 ## Features
 
 * Supports
-    * www.abc.lk
+    * www.abc.lk (this site it currently offline)
     * www.barclays.lk
     * www.laptop.lk
     * shop.memory.lk
@@ -24,6 +24,7 @@ A library to parse various information (such as item names/price...etc) from sel
 
 ## Problems:
 
+* barclays.lk is broken
 * This is a parser so if the site's that's been parsed change their layout..etc the parsers will not work.
 * This will not parse all the information available about a product from all the sites.
 
